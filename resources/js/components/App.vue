@@ -89,7 +89,7 @@
                           class="p-0 btn"
                         >
                           <img
-                            src="architectui/images/avatars/default-user.png"
+                            :src="$store.state.user.photo"
                             height="45em"
                           />
                           <i class="fa fa-angle-down ml-2 opacity-8"></i>
@@ -118,13 +118,13 @@
                                   <div class="widget-content-wrapper">
                                     <div class="widget-content-left mr-3">
                                       <img
-                                        src="architectui/images/avatars/default-user.png"
-                                        height="45em"
-                                      />
+											:src="$store.state.user.photo"
+											height="45em"
+										/>
                                     </div>
                                     <div class="widget-content-left">
                                       <div class="widget-heading">
-                                        {{ $store.state.user.nombre }}
+                                        {{ $store.state.user.name }}
                                       </div>
                                       <!--<div class="widget-subheading opacity-8">A short profile description</div>-->
                                     </div>
@@ -152,7 +152,7 @@
 
                     <div class="widget-content-left ml-3 header-user-info">
                       <div class="widget-heading">
-                        {{ $store.state.user.nombre }}
+                        {{ $store.state.user.name }}
                       </div>
                       <!--<div class="widget-subheading">asasd</div>-->
                     </div>
