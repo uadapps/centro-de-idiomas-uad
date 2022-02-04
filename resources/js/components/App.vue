@@ -89,7 +89,7 @@
                           class="p-0 btn"
                         >
                           <img
-                            :src="$store.state.user.photo"
+                           :src="'data:image/jpeg;base64,'+$store.state.user.photo"
                             height="45em"
                           />
                           <i class="fa fa-angle-down ml-2 opacity-8"></i>
@@ -118,7 +118,7 @@
                                   <div class="widget-content-wrapper">
                                     <div class="widget-content-left mr-3">
                                       <img
-											:src="$store.state.user.photo"
+											:src="'data:image/jpeg;base64,'+$store.state.user.photo"
 											height="45em"
 										/>
                                     </div>
@@ -233,7 +233,7 @@
                   <li>
                     <router-link to="/" class="mm-active">
                       <i class="metismenu-icon pe-7s-graph"></i>
-                      RVOES
+                      Inicio
                     </router-link>
                   </li>
  
@@ -270,14 +270,7 @@ export default {
   },
 
   created() {
-    if (this.$store.state.auth) {
-      this.verificarToken();
-	 
-      this.$router.push("/").catch((err) => {});
-
-    } else {
-      this.$router.push("/iniciar-sesion");
-    }
+     this.verificarToken();
   },
   methods: {
     async logout() {
@@ -291,14 +284,12 @@ export default {
     verificarToken() {
       let token = sessionStorage.getItem("token");
       let url = "/api/verificar-token";
-      Api.post(url, {
+      API.post(url, {
         token: token,
       })
         .then((response) => {
           console.log(response.data);
-          if (response.data.success == false) {
-            this.logout();
-          }
+           
         })
         .catch((error) => {
           console.log(error);

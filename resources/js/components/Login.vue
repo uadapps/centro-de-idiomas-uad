@@ -111,8 +111,8 @@ export default {
   name: "Login",
   data: function () {
     return {
-      usuario: "",
-      password: "",
+      usuario: "5505184",
+      password: "aVP5w6",
     };
   },
 

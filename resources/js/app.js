@@ -11,10 +11,10 @@ import VueAxios from 'vue-axios';
 import axios from 'axios';
 
 import VueRouter from 'vue-router';
-import {routes} from './routes';
+import router from './router';
 import Vue from 'vue';
  
-import {store} from './store/index';
+import store from './store';
 
 
 Vue.use(VueRouter);
@@ -24,10 +24,7 @@ var loggedIn = sessionStorage.getItem('loggedIn');
 if(loggedIn){
 	store.dispatch('authUser')
 }
-const router = new VueRouter({
-    mode:'history',
-    routes:routes
-});
+ 
 
 new Vue({
     el: '#app',

@@ -3,17 +3,21 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-export const store =  new Vuex.Store({
+const store =  new Vuex.Store({
 	
 	state:{
 		user:null,
 		auth:false,
+		data:null,
 	},
 	mutations:{
 		SET_USER(state,user){
 			state.user = user;
 			state.auth = Boolean(user);
-		} 
+		},
+		SET_DATA(state,data){
+			state.data = data;
+		}
 	},
 	actions:{
 		async login({commit},user){
@@ -30,16 +34,27 @@ export const store =  new Vuex.Store({
 		async authUser({commit}){ 
 			console.log("authUser");
 			const token = sessionStorage.getItem('token')
-			console.log("authUser",token);
+			//console.log("authUser",token);
 			try {
 				let response = await axios.post('/api/auth',token)
-				console.log("authUser",response.data.user);
+			//	console.log("authUser",response.data.user);
 				commit('SET_USER',response.data.user)
 			} catch (error) {
 				
 			}
 			
 			//commit('SET_USER',response.data.user)			 
+		},
+		async setData({commit},data){
+			console.log("setData");
+			commit('SET_DATA',data)
+		}
+	},
+	getters:{
+		isLoggedIn(){
+			return Boolean(sessionStorage.getItem('loggedIn'))
 		}
 	}
   })
+
+  export default store

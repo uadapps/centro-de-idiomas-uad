@@ -21,7 +21,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('login', [App\Http\Controllers\LoginController::class, 'login']);
 Route::post('verificar-token', [App\Http\Controllers\LoginController::class, 'verificarToken']);
 Route::post('/auth', [App\Http\Controllers\LoginController::class, 'auth']);
-Route::resource('planes', App\Http\Controllers\PlanController::class);
-Route::post('materias', [App\Http\Controllers\PlanController::class, 'nueva_materia']);
 
-Route::resource('rvoes', App\Http\Controllers\RvoeController::class);
+
+ 
+Route::post('/grupos', [App\Http\Controllers\Docentes\GruposController::class, 'getGrupos']);
+Route::get('/grupos/{id}/alumnos', [App\Http\Controllers\Docentes\GruposController::class, 'getAlumnosGrupo']);
+ 

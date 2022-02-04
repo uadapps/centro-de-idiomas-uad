@@ -13,16 +13,11 @@ export const routes =   [
         path:'/iniciar-sesion',
         component: () => import ('./components/Login.vue')
     },
-    //ejemplos de rutas crud
-    {
-        name:'products',
-        path:'/products',
-        component: () => import ('./components/products/Products.vue')
-
-    },
-    {
-        name:'products',
-        path:'products/:id',
-        component: Home
-    } 
+	{
+		name:'grupo-alumnos',
+		path:'/grupos/:slug/alumnos',
+		component: () => import ('./components/docentes/Grupos/GrupoAlumnos.vue')
+	}
+    
+	
 ]
