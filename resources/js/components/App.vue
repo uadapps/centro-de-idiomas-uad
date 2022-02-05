@@ -227,17 +227,8 @@
 
             <div class="scrollbar-sidebar">
               <div class="app-sidebar__inner">
-                <ul class="vertical-nav-menu">
-                  <li class="app-sidebar__heading">Menu</li>
-
-                  <li>
-                    <router-link to="/" class="mm-active">
-                      <i class="metismenu-icon pe-7s-graph"></i>
-                      Inicio
-                    </router-link>
-                  </li>
- 
-                </ul>
+                 <menu-docente v-if="$store.state.user.id_rol == 22"></menu-docente>
+				 <menu-alumno v-if="$store.state.user.id_rol == 21"></menu-alumno>
               </div>
             </div>
             <!-- FIN MENU -->
@@ -264,14 +255,21 @@
 </template> 
 <script>
 import { API } from "../common/api";
+import  MenuAlumno  from "./menus/MenuAlumno.vue";
+import MenuDocente from './menus/MenuDocente.vue';
 export default {
   data() {
     return {};
   },
-
+  components: {
+	MenuDocente,
+	MenuAlumno
+  },
   created() {
  
      this.verificarToken();
+	 
+  
   },
   methods: {
     async logout() {
@@ -290,7 +288,7 @@ export default {
       })
         .then((response) => {
           console.log(response.data);
-           
+           console.log("state=>",JSON.stringify(this.$store.state));
         })
         .catch((error) => {
           console.log(error);

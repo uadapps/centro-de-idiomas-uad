@@ -8,7 +8,7 @@
                         <i class="fa fa-file-alt icon-gradient bg-light"></i>
                     </div>
                     <div>
-                        <h4>Captura Calificaciones | <span style="text-transform: uppercase;">{{$route.params.slug}} </span>  |  {{grupo}} </h4>
+                        <h4><router-link to="/" >Grupos</router-link> | <span style="text-transform: uppercase;">{{$route.params.slug}} </span>  |  {{grupo}} | Captura de Calificaciones </h4>
                         <div class="page-title-subheading"></div>
                     </div>
                 </div>

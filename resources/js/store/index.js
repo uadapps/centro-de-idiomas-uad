@@ -36,9 +36,9 @@ const store =  new Vuex.Store({
 			const token = sessionStorage.getItem('token')
 			//console.log("authUser",token);
 			try {
-				let response = await axios.post('/api/auth',token)
-			//	console.log("authUser",response.data.user);
-				commit('SET_USER',response.data.user)
+				let response = await axios.post('/api/auth',{token:token})
+			 	console.log("authUser",response.data);
+				commit('SET_USER',response.data)
 			} catch (error) {
 				
 			}

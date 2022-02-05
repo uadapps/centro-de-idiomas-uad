@@ -111,8 +111,10 @@ export default {
   name: "Login",
   data: function () {
     return {
-      usuario: "5505184",
-      password: "aVP5w6",
+      //usuario: "5505184",
+      //password: "aVP5w6",
+      usuario: "",
+      password: "",
     };
   },
 
@@ -132,7 +134,7 @@ export default {
         password: this.password,
       };
 
-      let res = axios.post("/api/login", data);
+      let res = await axios.post("/api/login", data);
       try {
         let response = await axios.post("/api/login", data);
      
