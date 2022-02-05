@@ -270,6 +270,7 @@ export default {
   },
 
   created() {
+ 
      this.verificarToken();
   },
   methods: {

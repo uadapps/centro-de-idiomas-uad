@@ -77,7 +77,7 @@ export default {
 		verGrupo(grupo){
 			var slug = this.sluging(grupo.DescripcionMateria);
 			this.$store.dispatch('setData',grupo);
-			this.$router.push({name: 'grupo-alumnos', params: {slug:slug}}).catch(err => {});
+			this.$router.push({name: 'grupo-alumnos', params: {slug:slug,grupo:grupo.ID_Grupo}}).catch(err => {});
 		},
 		sluging(texto){
 			var txt = texto.toLowerCase();

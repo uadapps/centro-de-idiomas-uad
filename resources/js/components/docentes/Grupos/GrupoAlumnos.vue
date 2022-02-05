@@ -8,7 +8,7 @@
                         <i class="fa fa-file-alt icon-gradient bg-light"></i>
                     </div>
                     <div>
-                        <h4>Captura Calificaciones | <span style="text-transform: uppercase;"> </span>  |   </h4>
+                        <h4>Captura Calificaciones | <span style="text-transform: uppercase;">{{$route.params.slug}} </span>  |  {{grupo}} </h4>
                         <div class="page-title-subheading"></div>
                     </div>
                 </div>
@@ -47,10 +47,10 @@
 								<img v-else src="https://fundaciongaem.org/wp-content/uploads/2016/05/no-foto.jpg" width="50" height="50" class="rounded-circle" />
 								
 							</td>
-							<td>{{al.id}}</td>
+							<td>{{al.id_alumno}}</td>
                            <td>{{al.name}}</td>
 						   <td>
-							   <input type="text" class="form-control" maxlength="3" v-model="al.speaking1">
+							   <input type="text" class="form-control" maxlength="3" v-model="al.speaking1"  >
 						   </td> 
 						   <td>
 							   <input type="text" class="form-control" maxlength="3"  v-model="al.written1">
@@ -79,11 +79,18 @@
 							   </div>
 						   </td> 
 						   <td>
-							{{getFinal(al.midTerm,al.finalExam)}}
+							{{getFinal(al.midTerm,al.finalExam,index)}}
 						   </td> 
 						   
                         </tr>
                     </tbody>
+					<tfoot>
+						<tr>
+							<td colspan="3" class="text-right">
+								<button class="btn btn-primary" @click="saveGrades()">Guardar</button>
+							</td>
+						</tr>
+					</tfoot>
                 </table>
             </div>
         </div>
@@ -96,20 +103,21 @@ export default {
 	data: function () {
 		return {
 			alumnos: [],	
+			grupo:''
 		}
 	},
 	mounted: function () {
-				console.log("----",JSON.stringify(this.$route.params))
 		 this.getAlumnos()
 	},
 	methods:{
 		getAlumnos(){
-			console.log("----",JSON.stringify(this.$store.state))
-			/*var url = '/api/grupos/'+this.$route.params.grupo.ID_Grupo+'/alumnos'
+			 
+			 var url = '/api/grupos/'+this.$route.params.grupo+'/alumnos'
 			axios.get(url).then(response => {
-				this.alumnos = response.data
-				console.log(JSON.stringify(this.alumnos))
-			})*/
+				this.alumnos = response.data	
+				console.log(this.alumnos)
+				this.grupo = response.data[0].grupo	 
+			}) 
 		},
 		getMidGrade(speaking1,written1,hpa1,index){
 		 
@@ -149,9 +157,31 @@ export default {
 			this.alumnos[index].finalExam = res
 			return res
 		},
-		getFinal(midTerm,finalExam){
-			var res = ((midTerm+finalExam)/2).toFixed(2)
+		getFinal(midTerm,finalExam,index){
+			
+			var res = ((parseFloat(midTerm)+parseFloat(finalExam))/2) 
+			this.alumnos[index].finalGrade = res
+			//console.log(res)
 			return res
+		},
+		saveGrades(){
+			 
+			var g = this.$route.params.grupo
+			 var a = this.alumnos
+			  console.log(a)
+			a.forEach(function(alumno){
+				 
+				var url = '/api/grupos/'+g+'/alumnos/calificacion'
+				axios.put(url,alumno).then(response => {
+					console.log(response)
+				})
+			})
+		},
+		updateData(index){
+			var url = '/api/grupos/'+this.$route.params.grupo+'/alumnos/calificacion'
+			axios.put(url,this.alumnos[index]).then(response => {
+				console.log(response)
+			})
 		}
 	},
 	computed: {

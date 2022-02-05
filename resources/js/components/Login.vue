@@ -135,11 +135,12 @@ export default {
       let res = axios.post("/api/login", data);
       try {
         let response = await axios.post("/api/login", data);
-         console.log(JSON.stringify(response.data));
+     
 		 sessionStorage.setItem('token',response.data.token)
       	 sessionStorage.setItem('loggedIn',true)
 		 this.$store.dispatch("login", response.data);
-		 this.$router.push("/"); 
+		 this.$router.push("/").catch(err => {});
+		  
       } catch (error) {
 		 
 		toastr.error("Usuario o contraseña incorrectos");

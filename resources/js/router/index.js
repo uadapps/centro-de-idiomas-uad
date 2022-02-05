@@ -28,7 +28,7 @@ const router = new VueRouter({
 		},
 		{
 			name:'grupo-alumnos',
-			path:'/grupos/:slug/alumnos',
+			path:'/grupos/:slug/alumnos/:grupo',
 			component: () => import ('../components/docentes/Grupos/GrupoAlumnos.vue'),
 			meta: {
                 requiresAuth: true,
@@ -75,7 +75,7 @@ router.beforeEach((to, from, next) => {
 })
 router.afterEach((to, from) => {
     Vue.nextTick(() => {
-        document.title = to.pageTitle || 'Test App';
+        document.title = to.pageTitle || 'Centro de Idiomas UAD';
     });
 });
 

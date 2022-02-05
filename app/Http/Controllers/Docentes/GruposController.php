@@ -29,24 +29,31 @@ class GruposController extends  BaseController
 
 		foreach($res as $alumno){
 			$a = [
-				"id" => $alumno->ID_Alumno,
-				"name" => $alumno->Nombre,
-				"photo" =>  base64_encode($alumno->Foto),
-				"speaking1" =>0,
-				"written1" =>0,
-				"hpa1" =>0,
-				"midTerm" =>0,
-				"speaking2" =>0,
-				"written2" =>0,
-				"hpa2" =>0,
-				"finalExam" =>0,
-				"finalGrade" =>0,
+				'id' => $alumno->id,
+				"grupo" => $alumno->grupo,
+				"id_alumno" => $alumno->id_alumno,
+				"name" => $alumno->name,
+				"photo" =>  base64_encode($alumno->photo),
+				"speaking1"=>$alumno->speaking1,
+				"written1"=>$alumno->written1,
+				"hpa1"=>$alumno->hpa1,
+				"midTerm"=>$alumno->midTerm,
+				"speaking2"=>$alumno->speaking2,
+				"written2"=>$alumno->written2,
+				"hpa2"=>$alumno->hpa2,
+				"finalExam"=>$alumno->finalExam,
+				"finalGrade"=>$alumno->finalGrade,
 			];
 			array_push($alumnos, $a);
 		}
 		return response()->json($alumnos);
 	}
 
+	public function updateCalificacion(Request $request) {
+		$input = $request->all();
+		$res = DB::update('ci_update_calificacion ?,?,?,?,?,?,?,?,?,?',[$input['id'],$input['speaking1'],$input['written1'],$input['hpa1'],$input['midTerm'],$input['speaking2'],$input['written2'],$input['hpa2'],$input['finalExam'],$input['finalGrade']]);
+		return response()->json($res);
+	}
 
 
    
